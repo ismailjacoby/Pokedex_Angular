@@ -1,0 +1,41 @@
+<div class="p-2 lg:p-0 h-full w-full flex flex-col justify-center items-center z-50 shadow-2xl">
+    <div class="landscape:hidden lg:hidden flex h-5/6 w-full">
+        <div class="w-1/6 flex flex-col justify-evenly">
+            <button *ngIf="pkmResult" (click)="minus()" [disabled]="min == 0 && !pkmResult.previous" class="btn py-3"><</button>     
+        </div>
+        <ul class="w-4/6 mx-2 md:mx-3 h-full flex items-center relative">
+            <li class="h-full flex flex-col justify-center items-center cursor-pointer rounded-md px-1  hover:text-white {{ 'hover:bg-'+pkm.types[0].type.name+'/30' }}  {{ pkm.id === selectedId ? 'ring-inset ring-2 ring-'+pkm.types[0].type.name : '' }}" *ngFor="let pkm of pkmList | slice:min:max" (click)="changePkm(pkm)">
+                <img class="w-full" [src]="pkm.sprites.front_default" alt="">
+                <span class="h-1/6 {{ 'text-'+pkm.types[0].type.name }} font-bold text-base md:text-lg">#{{ pkm.id }}</span>
+            </li>
+            <div [ngClass]="{hidden: !loading}" class="h-full w-full bg-slate-100 absolute flex justify-center items-center">
+            <img class="w-14 motion-safe:animate-spin" src="/assets/images/pokeball.png" alt="catourn">
+            </div>
+        </ul> 
+        <div class="w-1/6 flex flex-col justify-evenly">
+            <button *ngIf="pkmResult" (click)="plus()" [disabled]="max == 20 && !pkmResult.next" class="btn py-3">></button>
+        </div>
+    </div>
+
+    <div class="hidden landscape:flex lg:flex flex-col h-5/6 w-full"> 
+
+        <ul class="hidden landscape:mt-1 mt-2 h-full landscape:grid lg:grid grid-rows-10 grid-flow-col gap-0 justify-items-center relative">
+            <li class="landscape:w-3/4 w-2/3 flex items-center cursor-pointer rounded-md px-2  hover:text-white {{ 'hover:bg-'+pkm.types[0].type.name+'/30' }}  {{ pkm.id === selectedId ? 'ring-inset ring-2 ring-'+pkm.types[0].type.name : '' }}" *ngFor="let pkm of pkmList " (click)="changePkm(pkm)">
+                <img class="w-8 lg:w-12" [src]="pkm.sprites.front_default" alt="">
+                <span class="text-base sm:text-xs lg:text-lg">{{ pkm.frenchName | titlecase }}</span>
+            </li>
+            <div [ngClass]="{hidden: !loading}" class="bg-slate-100 absolute h-full w-full flex justify-center items-center">
+                <img class="w-20 motion-safe:animate-spin" src="/assets/images/pokeball.png" alt="catourn">
+    
+            </div>
+        </ul>
+        
+        
+
+        
+    </div>
+    <div class="hidden h-1/6 w-full landscape:flex lg:flex justify-evenly items-center">
+        <button *ngIf="pkmResult" (click)="getAll(pkmResult.previous)" [disabled]="!pkmResult.previous" class="btn">Précédent</button>
+        <button *ngIf="pkmResult"  (click)="getAll(pkmResult.next)" [disabled]="!pkmResult.next" class="btn">Suivant</button>
+    </div>
+</div>

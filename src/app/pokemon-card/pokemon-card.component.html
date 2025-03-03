@@ -1,0 +1,76 @@
+<div class="h-full w-full flex justify-center items-center relative">
+    <div class="absolute h-full w-full bg-pokemon-pattern bg-cover bg-center contrast-50"></div>
+
+    <div [ngClass]="{'cardfull-flip': flip}" class="cardfull transform duration-200 h-3/4 w-3/4 lg:w-2/4 rounded-3xl relative ">
+        <div class="cardinner relative rounded-3xl bg-white h-full w-full">
+        <div
+            class="cardfront absolute h-full w-full {{ ( (pokemon) ? 'bg-'+pokemon.types[0].type.name+'/30' : 'bg-slate-100')}} rounded-3xl shadow-2xl">
+            <ng-container *ngIf="pokemon; else pokeball">
+                <div class="h-1/3 lg:h-1/2 w-full flex justify-between p-6">
+                    <div class="w-2/3 lg:w-1/2">
+                        <div
+                            class="text-2xl lg:text-3xl font-bold {{ ( (pokemon) ? 'text-'+pokemon.types[0].type.name : 'bg-slate-100')}}">
+                            #{{pokemon.id | number : '3.0'}}
+                        </div>
+
+                        <div class="text-3xl lg:text-4xl text-white mb-3 font-bold">
+                            {{pokemon.frenchName | titlecase}}</div>
+                        <div class="flex">
+                            <p class="mx-1 {{ 'bg-'+type.type.name}} py-1 px-2 rounded-lg font-bold text-xs text-white"
+                                *ngFor="let type of pokemon.types">{{ pkmTypes[type.type.name] | uppercase }}</p>
+                        </div>
+                    </div>
+
+                    <div [ngClass]="{pkmimg: popimg, test : test}" class="w-1/3 lg:w-1/2 h-full  flex justify-center items-center">
+                        <div class="h-full w-full relative">
+                            <img class="h-full blur-sm absolute top-1 left-2"
+                                [src]="pokemon.sprites.other.dream_world.front_default" alt="image de {{pokemon.name}}">
+    
+                            <img class="h-full blur-none" [src]="pokemon.sprites.other.dream_world.front_default"
+                                alt="image de {{pokemon.name}}">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div
+                    class="absolute z-10 bottom-0 h-2/3 lg:h-1/2 w-full bg-white rounded-b-3xl rounded-t-2xl py-4 lg:py-6 px-6 lg:px-12">
+                    <h2
+                        class="text-sm lg:text-base font-bold mb-2 pb-1 lg:pb-2 border-b-2 {{ ( (pokemon) ? 'border-'+pokemon.types[0].type.name : 'border-slate-100')}} ">
+                        À PROPOS </h2>
+                    <div class="mb-4">
+                        <p class="flex">
+                            <span class="w-1/3 lg:w-1/6 font-semibold">Taille  : </span>
+                            <span class="w-1/3 lg:w-1/6"> {{ pokemon.height * 10}} cm</span>
+                        </p>
+                        <p class="flex">
+                            <span class="w-1/3 lg:w-1/6 font-semibold">Poids : </span>
+                            <span class="w-1/3 lg:w-1/6"> {{ pokemon.weight / 10 | number : '1.0-2'}} kg</span>
+                        </p>
+                    </div>
+                    <h2
+                        class="text-sm lg:text-base font-bold mb-2 pb-1 lg:pb-2 border-b-2 {{ ( (pokemon) ? 'border-'+pokemon.types[0].type.name : 'border-slate-100')}}">
+                        DESCRIPTION</h2>
+                    <div>
+                        {{pokemon.flav}}
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-template #pokeball>
+                <div class="w-full h-full flex justify-center items-center">
+                    <img class="transform rotate-8" src="/assets/images/pokeball.png" alt="pokeball">
+
+                </div>
+            </ng-template>
+            
+        </div>
+        <div class="absolute rounded-3xl z-20 cardback bg-slate-100 w-full h-full flex justify-center items-center">
+            <img class="transform rotate-8" src="/assets/images/pokeball.png" alt="pokeball">
+
+        </div>
+    </div>
+    </div>
+</div>

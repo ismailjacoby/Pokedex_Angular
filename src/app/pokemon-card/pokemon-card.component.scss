@@ -1,0 +1,40 @@
+.cardfull {
+    perspective: 2000px;
+}
+
+
+.test {
+    translate: 0 0 ;
+    transition-delay: 0.65s;
+    transition-duration: 0.7s;
+    opacity: 1;
+
+}
+
+.pkmimg {
+    translate: 0 115% ;
+    transition-duration: 0.8s;
+    opacity: 0;
+
+}
+
+
+.cardinner {
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+}
+
+.cardfull-flip .cardinner {
+    transform: rotateY(180deg);
+}
+
+
+.cardfront, .cardback {
+    -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+
+.cardback {
+    transform: rotateY(180deg);
+}
